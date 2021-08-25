@@ -84,6 +84,16 @@ app.get("/api/users/auth", auth, (req, res) => {
     })
 })
 
+app.get("/api/users/logout", auth, (req, res) => {
+    User.findOneAndUpdate({_id:req.user._id}, // 미들웨어에서 가져옴
+        {token: ""}, (err, user) => {
+            if(err) return res.json({ success: false, err});
+            return res.status(200).send({
+                success: true
+            })
+        })
+})
+
 app.listen(PORT, () => {
  console.log(`🍀 ${PORT} Server Start With Express`)
 })
