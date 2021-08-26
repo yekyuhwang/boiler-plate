@@ -20,9 +20,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 // application/json
 app.use(bodyParser.json())
 app.use(cookieParser())
+app.use(
+    cors({
+      origin: ["http://localhost:3000"],
+    })
+  );
 
 app.get("/", (req, res) => {
  res.send("Hello World")        
+})
+
+app.get("/api/hello", (req, res) => {
+    res.send("안녕하세요")
+
 })
 
 app.post("/api/users/register", (req, res) => {
